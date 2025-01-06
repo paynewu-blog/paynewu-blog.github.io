@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0"><link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16-next.png"><link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222"><meta name="msapplication-config" content="/images/favicon/browserconfig.xml"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="google-site-verification" content="z8FZsD3BLa5a48lA2pIVAyEG_a7yS8KId63-e8zvJKI"><meta name="msvalidate.01" content="0804A62A89E386620E5C2AC212435A3C"><meta name="yandex-verification" content="66b23ce89136e07b"><meta name="baidu-site-verification" content="codeva-hf40ye2Gtf"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"><link rel="stylesheet" href="/lib/pace/pace-theme-mac-osx.min.css"><script src="/lib/pace/pace.min.js"></script><script id="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"paynewu-blog.github.io",root:"/",scheme:"Mist",version:"7.8.0",exturl:!0,sidebar:{position:"right",width:380,display:"post",padding:18,offset:12,onmobile:!1},copycode:{enable:!0,show_result:!0,style:"mac"},back2top:{enable:!0,sidebar:!1,scrollpercent:!0},bookmark:{enable:!1,color:"#222",save:"auto"},fancybox:!1,mediumzoom:!0,lazyload:!0,pangu:!0,comments:{style:"tabs",active:"valine",storage:!0,lazyload:!1,nav:null,activeClass:"valine"},algolia:{hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},localsearch:{enable:!0,trigger:"auto",top_n_per_article:5,unescape:!1,preload:!0},motion:{enable:!0,async:!0,transition:{post_block:"bounceDownIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},path:"search.xml"}</script><meta name="keywords" content=""><meta name="robots" content="index,follow"><meta name="GOOGLEBOT" content="index,follow"><meta name="author" content="Payne的个人小屋"><meta name="description" content="在聊工程化之前，对于“工程”我们进行再一次剖析。  首先，何为工程化。 我个人认为即为了适应纷繁复杂的软件变化和演进而提出的相关方式方法，其目的是为了更好的排兵布阵、分工协作。  工程过程中也意味着取舍  软件工程，将工程化的概念左移，在软件设计之初就引入工程化的思想，囊括住软件的全生命周期。   研发效能 当我们在谈”工程化“，我们究竟在谈什么？ 有人讨论，是因为存在问题，而问题就在于实际的研发"><meta property="og:type" content="article"><meta property="og:title" content="聊聊工程化"><meta property="og:url" content="https://paynewu-blog.github.io/41701.html"><meta property="og:site_name" content="Payne的个人小屋"><meta property="og:description" content="在聊工程化之前，对于“工程”我们进行再一次剖析。  首先，何为工程化。 我个人认为即为了适应纷繁复杂的软件变化和演进而提出的相关方式方法，其目的是为了更好的排兵布阵、分工协作。  工程过程中也意味着取舍  软件工程，将工程化的概念左移，在软件设计之初就引入工程化的思想，囊括住软件的全生命周期。   研发效能 当我们在谈”工程化“，我们究竟在谈什么？ 有人讨论，是因为存在问题，而问题就在于实际的研发"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2023-12-22T14:51:33.000Z"><meta property="article:modified_time" content="2025-01-06T03:07:07.087Z"><meta property="article:author" content="Payne Wu"><meta property="article:tag" content="Payne Wu,Payne-Wu,payne wu,payne-wu,Payne,payne"><meta property="article:tag" content="Java,java,Python,python,py,GO,Go,Golang,go,golang,JavaScript,javascript,js"><meta property="article:tag" content="spider,crawler"><meta property="article:tag" content="Security,security,sec"><meta property="article:tag" content="CloudNative,cloudnative"><meta property="article:tag" content="DevOps,devops,DevSecOps,devsecops,GitOps,gitops,FinOps,finops"><meta name="twitter:card" content="summary"><link rel="canonical" href="https://paynewu-blog.github.io/41701.html"><script id="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"zh-CN"}</script><title>聊聊工程化 | Payne的个人小屋</title><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript><link rel="alternate" href="/atom.xml" title="Payne的个人小屋" type="application/atom+xml"></head><body itemscope itemtype="http://schema.org/WebPage"><div class="container use-motion"><div class="headband"></div><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="切换导航栏"><span class="toggle-line toggle-line-first"></span> <span class="toggle-line toggle-line-middle"></span> <span class="toggle-line toggle-line-last"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span><h1 class="site-title">Payne的个人小屋</h1><span class="logo-line-after"><i></i></span></a><p class="site-subtitle" itemprop="description">Every day</p></div><div class="site-nav-right"><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul id="menu" class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">文章归档</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">文章标签</a></li><li class="menu-item menu-item-message"><a href="/message/" rel="section">留言于我</a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger">文章搜索</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"><input autocomplete="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span></div><div id="search-result"><div id="no-result"><i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i></div></div></div></div></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div><div class="reading-progress-bar"></div><main class="main"><div class="main-inner"><div class="content-wrap"><div class="content post posts-expand"><article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://paynewu-blog.github.io/41701.html"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/favicon/android-chrome-512x512.png"><meta itemprop="name" content="Payne Wu"><meta itemprop="description" content="格物致知，知行合一，致良知"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Payne的个人小屋"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">聊聊工程化</h1><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间：2023-12-22 22:51:33" itemprop="dateCreated datePublished" datetime="2023-12-22T22:51:33+08:00">2023-12-22</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar-check"></i> </span><span class="post-meta-item-text">更新于</span> <time title="修改时间：2025-01-06 11:07:07" itemprop="dateModified" datetime="2025-01-06T11:07:07+08:00">2025-01-06</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-comment"></i> </span><span class="post-meta-item-text">Valine：</span> <a title="valine" href="/41701.html#valine-comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/41701.html" itemprop="commentCount"></span></a></span><br><span class="post-meta-item" title="本文字数"><span class="post-meta-item-icon"><i class="far fa-file-word"></i> </span><span class="post-meta-item-text">本文字数：</span> <span>1.4k</span> </span><span class="post-meta-item" title="阅读时长"><span class="post-meta-item-icon"><i class="far fa-clock"></i> </span><span class="post-meta-item-text">阅读时长 &asymp;</span> <span>1 分钟</span></span></div></header><div class="post-body" itemprop="articleBody"><p>在聊工程化之前，对于“工程”我们进行再一次剖析。</p><p>首先，何为工程化。 我个人认为即为了适应纷繁复杂的软件变化和演进而提出的相关方式方法，其目的是为了更好的排兵布阵、分工协作。</p><blockquote><p>工程过程中也意味着取舍</p></blockquote><p>软件工程，将工程化的概念左移，在软件设计之初就引入工程化的思想，囊括住软件的全生命周期。</p><h2 id="研发效能"><a class="markdownIt-Anchor" href="#研发效能"></a> 研发效能</h2><p>当我们在谈”工程化“，我们究竟在谈什么？<br>有人讨论，是因为存在问题，而问题就在于实际的研发效率，已经远远低于预期了。<br>企业初创期，一个idea从形成到上线，也许只需要1~2小时，而随着企业的发展，类似的事情的执行与落地往往需要多个团队协同，花费数周甚至是数月才能完成。 这便造成了鲜明的对比，而这一对比，对于没有深入理解软件工程的人来说，显得难以理解，可有往往无计可施。</p><ul><li>效能：衡量产品的经济效应</li><li>效率：提升业务的响应能力，提高吞吐，降低成本</li></ul><h2 id="本质复杂度与偶然复杂度"><a class="markdownIt-Anchor" href="#本质复杂度与偶然复杂度"></a> 本质复杂度与偶然复杂度</h2><p>21世纪初，早期的互联网从业者开发简易的网站只需要学会使用Linux、Apache、MySQL、PHP（Perl）即可。可如今，在大型互联网公司工作的开发者，，需要学习理解的技术栈早就不知道上升了几个量基本别。如开发框架、分布式、微服务、云原生等等。</p><p>如果仅仅是这些复杂度还好，毕竟都是行业的标准技术，以开发者的学习能力，很快就能掌握。令人生畏的是，大型公司中都有一套或多套软件系统，这些软件系统的代码规模往往在百万行以上，质量有好坏而开发者必须基于这些系统开展工作。因此研发效率大幅度降低，其中一个核心的因素——软件复杂度的指数级上升。</p><p>Fred Brooks 在其经典著作《人月神话》的【没有饮弹】一文中对于软件的复杂度有着精彩的论述，他将软件复杂度分为本质复杂度与偶然复杂度。</p><blockquote><p>本质复杂度与偶然复杂度这2个词来源于亚里士多德的《形而上学》，在亚里士多德那里，本质属性是一个物体必然拥有的属性，而偶然属性是一个物体可以（也可以不）拥有的属性。</p></blockquote><ul><li>例1、一个电商系统必然会包含交易、支付、商品等业务复杂度，而这个复杂度是天然就有的，故称之为本质复杂度。</li><li>例2、一个电商软件可以是基于容器技术进行管理部署，技术体系选型为Java。而这些间接引入的复杂度，称之为偶然复杂度。</li></ul><p>Fred Brooks 所描述的本质复杂度，指的是来自问题域本身的复杂度，除非缩小问题域的范围。 否则是无法消除本质复杂度的，而偶然复杂度是由于解决方案带来的。</p><p>我们还可以从所谓的问题空间（Problem Space）和方案空间（Solution Space）来理解这2个复杂度，问题空间就是现实的初始状态和期望状态，以及一系列约束规则（我们通常称之为业务），方案空间就是工程师设计实现的，一些从初始状态达到期望状态的步骤。缺乏经验的工程师往往在还没理解清楚问题的情况下就急于写代码，就是缺乏对于问题空间和方案空间的理解，而近年来领域驱动设计为那么多工程师所推崇，其核心原因就是它指导了大家重视问题空间，去直面本质复杂度。</p><p>《人月神话》写于1975年，距今已有47了，Brooks认为软件的复杂度是无法得到本质上的降低的，同时认为随着高级变成语言的演进，开发环境的发展，偶然复杂度会得到本质的降低。</p><h2 id="如何进行高效的工程化实践"><a class="markdownIt-Anchor" href="#如何进行高效的工程化实践"></a> 如何进行高效的工程化实践</h2><ol><li>统一概念</li><li>树立指导思想与标准</li><li>沉淀最佳实践（软件设计,代码风格,安全编码）</li><li>工具\平台以及自动化</li><li>方式方法与规律</li></ol></div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者： </strong>Payne Wu</li><li class="post-copyright-link"><strong>本文链接：</strong> <a href="https://paynewu-blog.github.io/41701.html" title="聊聊工程化">https://paynewu-blog.github.io/41701.html</a></li><li class="post-copyright-license"><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li></ul></div><footer class="post-footer"><div class="post-nav"><div class="post-nav-item"><a href="/7487.html" rel="prev" title="逻辑与思维"><i class="fa fa-chevron-left"></i> 逻辑与思维</a></div><div class="post-nav-item"><a href="/4170211.html" rel="next" title="Python之GIL">Python之GIL <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div><div class="comments" id="valine-comments"></div><script>window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span> <span class="toggle-line toggle-line-middle"></span> <span class="toggle-line toggle-line-last"></span></div><aside class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc">文章目录</li><li class="sidebar-nav-overview">站点概览</li></ul><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A0%94%E5%8F%91%E6%95%88%E8%83%BD"><span class="nav-number">1.</span> <span class="nav-text">研发效能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E8%B4%A8%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E5%81%B6%E7%84%B6%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.</span> <span class="nav-text">本质复杂度与偶然复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E9%AB%98%E6%95%88%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%8C%96%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.</span> <span class="nav-text">如何进行高效的工程化实践</span></a></li></ol></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" alt="Payne Wu" src="/images/favicon/android-chrome-512x512.png"><p class="site-author-name" itemprop="name">Payne Wu</p><div class="site-description" itemprop="description">格物致知，知行合一，致良知</div></div><div class="site-state-wrap motion-element"><nav class="site-state"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">146</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">140</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">62</span> <span class="site-state-item-name">标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class="links-of-author-item"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F6d3BheW5l" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;azwpayne"><i class="fab fa-github fa-fw"></i>GitHub</span> </span><span class="links-of-author-item"><span class="exturl" data-url="bWFpbHRvOnBheW5ld3UwNzE5QGdtYWlsLmNvbQ==" title="E-Mail → mailto:paynewu0719@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span> </span><span class="links-of-author-item"><span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS93dS16aGktcGVuZy03Mi03OA==" title="ZhiHu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;wu-zhi-peng-72-78"><i class="fa fa-magic fa-fw"></i>ZhiHu</span> </span><span class="links-of-author-item"><span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdS82OTg3MjM0NDgz" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;6987234483"><i class="fab fa-weibo fa-fw"></i>Weibo</span></span></div></div></div></aside><div id="sidebar-dimmer"></div></div></main><footer class="footer"><div class="footer-inner"><div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">湘ICP备2021019893号-1</span></div><div class="copyright">&copy; <span itemprop="copyrightYear">2025</span> <span class="with-love"><i class="fa fa-heart"></i> </span><span class="author" itemprop="copyrightHolder">Payne Wu</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-chart-area"></i> </span><span title="站点总字数">277k</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-coffee"></i> </span><span title="站点阅读时长">4:12</span></div><div style="display:none"><script src="//s95.cnzz.com/z_stat.php?id=true&web_id=true"></script></div></div></footer></div><script src="/lib/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script><script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script><script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script><script src="/lib/velocity/velocity.min.js"></script><script src="/lib/velocity/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/gh/paynewu-blog/paynewu-blog.github.io@master/js/utils.js"></script><script src="https://cdn.jsdelivr.net/gh/paynewu-blog/paynewu-blog.github.io@master/js/motion.js"></script><script src="https://cdn.jsdelivr.net/gh/paynewu-blog/paynewu-blog.github.io@master/js/schemes/muse.js"></script><script src="https://cdn.jsdelivr.net/gh/paynewu-blog/paynewu-blog.github.io@master/js/next-boot.js"></script><script defer src="/lib/three/three.min.js"></script><script defer src="/lib/three/three-waves.min.js"></script><script defer src="/lib/three/canvas_lines.min.js"></script><script defer src="/lib/three/canvas_sphere.min.js"></script><script>!function(){var e,t,o,n,r,a=document.getElementsByTagName("link");if(0<a.length)for(i=0;i<a.length;i++)"canonical"==a[i].rel.toLowerCase()&&a[i].href&&(e=a[i].href);t=e?e.split(":")[0]:window.location.protocol.split(":")[0],e=e||window.location.href,window,n=e,r=document.referrer,/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi.test(n)||(o="https"===String(t).toLowerCase()?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif",r?(o+="?r="+encodeURIComponent(document.referrer),n&&(o+="&l="+n)):n&&(o+="?l="+n),(new Image).src=o)}()</script><script src="https://cdn.jsdelivr.net/gh/paynewu-blog/paynewu-blog.github.io@master/js/local-search.js"></script><script>if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'neutral',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}</script><script>if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }</script><script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script><script>window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://paynewu-blog.github.io/41701.html',]
+      });
+      });</script><script>NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : true,
+      appId      : 'v5yI1sEaxpTl6gCkO0dApNOH-gzGzoHsz',
+      appKey     : 'ugl27izkUCvh7RIyvo7kcFCv',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});</script></body></html>
